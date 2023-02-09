@@ -14,11 +14,11 @@ import config from './config/config';
 
 // Create express instance.
 const app: Application = express();
-const upload = multer({dest: 'src/uploads/'});	// Files upload directory path.
+const upload = multer({dest: 'public/uploads/'});	// Files upload directory path.
 const converter = new showdown.Converter();
 
 //* Global Middlewares.
-app.use(express.static('src/public'));	// Serve public folder publicily.
+app.use(express.static('public'));	// Serve public folder publicily.
 
 //* Endpoints.
 app.get('/', (req: Request, res: Response): void => {
