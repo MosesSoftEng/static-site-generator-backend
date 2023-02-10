@@ -53,6 +53,7 @@ app.post('/sites/upload', [cors(), upload.single('file')], async (req: Request, 
 	}
 });
 
+app.options('/sites/', cors()); // Enable pre-flight request for this endpoint.
 app.get('/sites/', cors(), (req: Request, res: Response): Response => res.status(200)
 	.json({message: '', data: getDirectories(config.sitesDir)}));
 
