@@ -52,9 +52,9 @@ app.get('/sites/', cors(), (req: Request, res: Response): Response => res.status
 	.json({message: '', data: getDirectories(config.sitesDir)}));
 
 //* Run server.
-app.listen(config.port, (): void => {
-	console.log(`Server Running at 👉 http://localhost:${config.port} \n press CTRL+C to stop server`);
-});
+// app.listen(config.port, (): void => {
+// 	console.log(`Server Running at 👉 http://localhost:${config.port} \n press CTRL+C to stop server`);
+// });
 
 //* Export the Express API for vercel.
 module.exports = app;
