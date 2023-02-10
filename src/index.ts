@@ -4,9 +4,11 @@
 
 //* Imports
 import express, {type Application, type Response, type Request} from 'express';
+import fs from 'fs';
+import path from 'path';
+
 import cors from 'cors';
 import multer from 'multer';
-import fs from 'fs';
 import showdown from 'showdown';
 import 'dotenv/config';
 
@@ -18,7 +20,7 @@ const upload = multer({dest: '/tmp/uploads/'});	// Files upload directory path.
 const converter = new showdown.Converter();
 
 //* Global Middlewares.
-app.use(express.static('/tmp'));	// Serve public folder publicily.
+app.use(express.static(path.join(__dirname, 'tmp')));	// Serve public folder publicily.
 
 //* Run server.
 app.listen(config.port, (): void => {
