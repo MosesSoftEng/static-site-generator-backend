@@ -20,6 +20,11 @@ const converter = new showdown.Converter();
 //* Global Middlewares.
 app.use(express.static('public'));	// Serve public folder publicily.
 
+//* Run server.
+app.listen(config.port, (): void => {
+	console.log(`Server Running at 👉 http://localhost:${config.port} \n press CTRL+C to stop server`);
+});
+
 //* Endpoints.
 app.get('/', (req: Request, res: Response): void => {
 	res.send('Hello Typescript with Node.js!');
@@ -50,14 +55,6 @@ app.post('/sites/upload', [cors(), upload.single('file')], async (req: Request, 
 
 app.get('/sites/', cors(), (req: Request, res: Response): Response => res.status(200)
 	.json({message: '', data: getDirectories(config.sitesDir)}));
-
-//* Run server.
-// app.listen(config.port, (): void => {
-// 	console.log(`Server Running at 👉 http://localhost:${config.port} \n press CTRL+C to stop server`);
-// });
-
-//* Export the Express API for vercel.
-module.exports = app;
 
 const convertMarkDownToHtml = async (filePath: string): Promise<string> => new Promise((resolve, reject) => {
 	fs.readFile(filePath, 'utf8', (err, data) => {
@@ -104,3 +101,7 @@ const moveFile = async (originPath: string, targetPath: string): Promise<string>
 const getDirectories = (path: string): string[] => fs.readdirSync(path, {withFileTypes: true})
 	.filter(dirent => dirent.isDirectory())
 	.map(dirent => dirent.name);
+
+//* Export the Express API for vercel.
+module.exports = app;
+

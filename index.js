@@ -29,6 +29,10 @@ const upload = (0, multer_1.default)({ dest: 'public/uploads/' }); // Files uplo
 const converter = new showdown_1.default.Converter();
 //* Global Middlewares.
 app.use(express_1.default.static('public')); // Serve public folder publicily.
+//* Run server.
+app.listen(config_1.default.port, () => {
+    console.log(`Server Running at 👉 http://localhost:${config_1.default.port} \n press CTRL+C to stop server`);
+});
 //* Endpoints.
 app.get('/', (req, res) => {
     res.send('Hello Typescript with Node.js!');
@@ -54,12 +58,6 @@ app.post('/sites/upload', [(0, cors_1.default)(), upload.single('file')], (req, 
 }));
 app.get('/sites/', (0, cors_1.default)(), (req, res) => res.status(200)
     .json({ message: '', data: getDirectories(config_1.default.sitesDir) }));
-//* Run server.
-// app.listen(config.port, (): void => {
-// 	console.log(`Server Running at 👉 http://localhost:${config.port} \n press CTRL+C to stop server`);
-// });
-//* Export the Express API for vercel.
-module.exports = app;
 const convertMarkDownToHtml = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
         fs_1.default.readFile(filePath, 'utf8', (err, data) => {
@@ -101,3 +99,5 @@ const moveFile = (originPath, targetPath) => __awaiter(void 0, void 0, void 0, f
 const getDirectories = (path) => fs_1.default.readdirSync(path, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
+//* Export the Express API for vercel.
+module.exports = app;
