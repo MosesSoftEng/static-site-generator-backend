@@ -1,5 +1,5 @@
 export default {
 	env: process.env.NODE_ENV,
-	publicDir: 'tmp',
+	sitesDir: '/tmp/sites/',
 	port: process.env.PORT ?? 8007,
 };
