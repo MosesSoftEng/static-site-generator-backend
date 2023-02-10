@@ -19,7 +19,7 @@ const app: Application = express();
 const upload = multer({dest: '/tmp/uploads/'});	// Files upload directory path.
 const converter = new showdown.Converter();
 
-const sitesDir = config.publicDir + '/sites/';
+const sitesDir = `/${config.publicDir}/sites/`;
 
 //* Global Middlewares.
 app.use(express.static(path.join(__dirname, config.publicDir)));	// Serve public folder publicily.

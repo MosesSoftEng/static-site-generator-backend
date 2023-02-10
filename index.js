@@ -28,7 +28,7 @@ const config_1 = __importDefault(require("./config/config"));
 const app = (0, express_1.default)();
 const upload = (0, multer_1.default)({ dest: '/tmp/uploads/' }); // Files upload directory path.
 const converter = new showdown_1.default.Converter();
-const sitesDir = config_1.default.publicDir + '/sites/';
+const sitesDir = `/${config_1.default.publicDir}/sites/`;
 //* Global Middlewares.
 app.use(express_1.default.static(path_1.default.join(__dirname, config_1.default.publicDir))); // Serve public folder publicily.
 //* Run server.
