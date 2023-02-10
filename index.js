@@ -24,12 +24,13 @@ const multer_1 = __importDefault(require("multer"));
 const showdown_1 = __importDefault(require("showdown"));
 require("dotenv/config");
 const config_1 = __importDefault(require("./config/config"));
-// Create express instance.
+//* Configs and init
 const app = (0, express_1.default)();
 const upload = (0, multer_1.default)({ dest: '/tmp/uploads/' }); // Files upload directory path.
 const converter = new showdown_1.default.Converter();
+const sitesDir = config_1.default.publicDir + '/sites/';
 //* Global Middlewares.
-app.use(express_1.default.static(path_1.default.join(__dirname, 'tmp'))); // Serve public folder publicily.
+app.use(express_1.default.static(path_1.default.join(__dirname, config_1.default.publicDir))); // Serve public folder publicily.
 //* Run server.
 app.listen(config_1.default.port, () => {
     console.log(`Server Running at 👉 http://localhost:${config_1.default.port} \n press CTRL+C to stop server`);
@@ -42,7 +43,7 @@ app.options('/sites/upload', (0, cors_1.default)()); // Enable pre-flight reques
 app.post('/sites/upload', [(0, cors_1.default)(), upload.single('file')], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { path: uploadFilePath } = req.file;
     const { sourceRelativePath } = req.body;
-    const publicFilePath = config_1.default.sitesDir + sourceRelativePath.replace(/\.md$/, '.html');
+    const publicFilePath = sitesDir + sourceRelativePath.replace(/\.md$/, '.html');
     try {
         if (sourceRelativePath.endsWith('.md')) {
             yield convertMarkDownToHtml(uploadFilePath);
@@ -59,7 +60,7 @@ app.post('/sites/upload', [(0, cors_1.default)(), upload.single('file')], (req, 
 }));
 app.options('/sites/', (0, cors_1.default)()); // Enable pre-flight request for this endpoint.
 app.get('/sites/', (0, cors_1.default)(), (req, res) => res.status(200)
-    .json({ message: '', data: getDirectories(config_1.default.sitesDir) }));
+    .json({ message: '', data: getDirectories(sitesDir) }));
 const convertMarkDownToHtml = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
         fs_1.default.readFile(filePath, 'utf8', (err, data) => {

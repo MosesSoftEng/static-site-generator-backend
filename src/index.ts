@@ -14,13 +14,15 @@ import 'dotenv/config';
 
 import config from './config/config';
 
-// Create express instance.
+//* Configs and init
 const app: Application = express();
 const upload = multer({dest: '/tmp/uploads/'});	// Files upload directory path.
 const converter = new showdown.Converter();
 
+const sitesDir = config.publicDir + '/sites/';
+
 //* Global Middlewares.
-app.use(express.static(path.join(__dirname, 'tmp')));	// Serve public folder publicily.
+app.use(express.static(path.join(__dirname, config.publicDir)));	// Serve public folder publicily.
 
 //* Run server.
 app.listen(config.port, (): void => {
@@ -36,7 +38,7 @@ app.options('/sites/upload', cors()); // Enable pre-flight request for this endp
 app.post('/sites/upload', [cors(), upload.single('file')], async (req: Request, res: Response) => {
 	const {path: uploadFilePath} = req.file!;
 	const {sourceRelativePath} = req.body as {sourceRelativePath: string};
-	const publicFilePath = config.sitesDir + sourceRelativePath.replace(/\.md$/, '.html');
+	const publicFilePath = sitesDir + sourceRelativePath.replace(/\.md$/, '.html');
 
 	try {
 		if (sourceRelativePath.endsWith('.md')) {
@@ -57,7 +59,7 @@ app.post('/sites/upload', [cors(), upload.single('file')], async (req: Request, 
 
 app.options('/sites/', cors()); // Enable pre-flight request for this endpoint.
 app.get('/sites/', cors(), (req: Request, res: Response): Response => res.status(200)
-	.json({message: '', data: getDirectories(config.sitesDir)}));
+	.json({message: '', data: getDirectories(sitesDir)}));
 
 const convertMarkDownToHtml = async (filePath: string): Promise<string> => new Promise((resolve, reject) => {
 	fs.readFile(filePath, 'utf8', (err, data) => {
