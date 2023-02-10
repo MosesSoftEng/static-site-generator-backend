@@ -25,7 +25,7 @@ require("dotenv/config");
 const config_1 = __importDefault(require("./config/config"));
 // Create express instance.
 const app = (0, express_1.default)();
-const upload = (0, multer_1.default)({ dest: 'public/uploads/' }); // Files upload directory path.
+const upload = (0, multer_1.default)({ dest: '/tmp/uploads/' }); // Files upload directory path.
 const converter = new showdown_1.default.Converter();
 //* Global Middlewares.
 app.use(express_1.default.static('public')); // Serve public folder publicily.

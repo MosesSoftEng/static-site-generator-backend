@@ -14,7 +14,7 @@ import config from './config/config';
 
 // Create express instance.
 const app: Application = express();
-const upload = multer({dest: 'public/uploads/'});	// Files upload directory path.
+const upload = multer({dest: '/tmp/uploads/'});	// Files upload directory path.
 const converter = new showdown.Converter();
 
 //* Global Middlewares.
