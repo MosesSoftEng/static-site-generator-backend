@@ -56,6 +56,9 @@ app.listen(config.port, (): void => {
 	console.log(`Server Running at 👉 http://localhost:${config.port} \n press CTRL+C to stop server`);
 });
 
+//* Export the Express API for vercel.
+module.exports = app;
+
 const convertMarkDownToHtml = async (filePath: string): Promise<string> => new Promise((resolve, reject) => {
 	fs.readFile(filePath, 'utf8', (err, data) => {
 		if (err) {

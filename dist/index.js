@@ -58,6 +58,8 @@ app.get('/sites/', (0, cors_1.default)(), (req, res) => res.status(200)
 app.listen(config_1.default.port, () => {
     console.log(`Server Running at 👉 http://localhost:${config_1.default.port} \n press CTRL+C to stop server`);
 });
+//* Export the Express API for vercel.
+module.exports = app;
 const convertMarkDownToHtml = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
         fs_1.default.readFile(filePath, 'utf8', (err, data) => {

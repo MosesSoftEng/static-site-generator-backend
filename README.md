@@ -25,4 +25,7 @@ npx tsc # or
 
 # Execute transpiled typescript aka javascript
 node dist/index.js
+
+# Create vercel config file.
+touch vercel.json
 ```
