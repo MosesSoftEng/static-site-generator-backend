@@ -28,7 +28,7 @@ const app = (0, express_1.default)();
 const upload = (0, multer_1.default)({ dest: '/tmp/uploads/' }); // Files upload directory path.
 const converter = new showdown_1.default.Converter();
 //* Global Middlewares.
-app.use(express_1.default.static('public')); // Serve public folder publicily.
+app.use(express_1.default.static('tmp')); // Serve public folder publicily.
 //* Run server.
 app.listen(config_1.default.port, () => {
     console.log(`Server Running at 👉 http://localhost:${config_1.default.port} \n press CTRL+C to stop server`);

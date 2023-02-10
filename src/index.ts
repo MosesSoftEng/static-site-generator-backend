@@ -18,7 +18,7 @@ const upload = multer({dest: '/tmp/uploads/'});	// Files upload directory path.
 const converter = new showdown.Converter();
 
 //* Global Middlewares.
-app.use(express.static('public'));	// Serve public folder publicily.
+app.use(express.static('tmp'));	// Serve public folder publicily.
 
 //* Run server.
 app.listen(config.port, (): void => {
