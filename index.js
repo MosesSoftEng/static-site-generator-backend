@@ -56,6 +56,7 @@ app.post('/sites/upload', [(0, cors_1.default)(), upload.single('file')], (req, 
             .json({ message: 'Server error' });
     }
 }));
+app.options('/sites/', (0, cors_1.default)()); // Enable pre-flight request for this endpoint.
 app.get('/sites/', (0, cors_1.default)(), (req, res) => res.status(200)
     .json({ message: '', data: getDirectories(config_1.default.sitesDir) }));
 const convertMarkDownToHtml = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
