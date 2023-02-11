@@ -17,18 +17,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 //* Imports
 const express_1 = __importDefault(require("express"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const multer_1 = __importDefault(require("multer"));
-const fs_1 = __importDefault(require("fs"));
 const showdown_1 = __importDefault(require("showdown"));
 require("dotenv/config");
 const config_1 = __importDefault(require("./config/config"));
-// Create express instance.
+//* Configs and init
 const app = (0, express_1.default)();
 const upload = (0, multer_1.default)({ dest: '/tmp/uploads/' }); // Files upload directory path.
 const converter = new showdown_1.default.Converter();
 //* Global Middlewares.
-app.use(express_1.default.static('public')); // Serve public folder publicily.
+app.use(express_1.default.static(path_1.default.join(__dirname, 'tmp'))); // Serve tmp directory publicily.
 //* Run server.
 app.listen(config_1.default.port, () => {
     console.log(`Server Running at 👉 http://localhost:${config_1.default.port} \n press CTRL+C to stop server`);
