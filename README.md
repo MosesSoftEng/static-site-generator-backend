@@ -17,7 +17,6 @@ npm run dev
 # configurations and environments
 # Create .env file with properties as given in .env.example.
 
-
 # Production Server
 # Transpile TypeScript(set in rootDir in tsconfig.json) to JavaScript.
 npx tsc # or
